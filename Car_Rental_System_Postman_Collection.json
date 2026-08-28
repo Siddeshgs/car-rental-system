@@ -1,0 +1,246 @@
+{
+  "info": {
+    "_postman_id": "c71a39f1-a15d-4f06-8b2f-90e11894d033",
+    "name": "Car Rental System API Collection",
+    "description": "Complete REST API requests for testing Car Rental System (Spring Boot + MySQL/H2)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Cars",
+      "item": [
+        {
+          "name": "1. Get All Cars (Filtered)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cars?category=ELECTRIC&maxRate=150",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cars"],
+              "query": [
+                { "key": "category", "value": "ELECTRIC" },
+                { "key": "maxRate", "value": "150" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Get Available Cars",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cars/available",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cars", "available"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Get Car By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cars/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cars", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "4. Add New Car",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"make\": \"Genesis\",\n  \"model\": \"G80 Sport\",\n  \"year\": 2024,\n  \"category\": \"LUXURY\",\n  \"dailyRate\": 88.00,\n  \"fuelType\": \"PETROL\",\n  \"transmission\": \"AUTOMATIC\",\n  \"seats\": 5,\n  \"registrationNumber\": \"GEN-7788\",\n  \"mileage\": 5000,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1552519507-da3b142c6e3d\",\n  \"features\": \"AWD, Nappa Leather, Lexicon Audio\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cars",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cars"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "5. Update Car Status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cars/1/status?status=MAINTENANCE",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cars", "1", "status"],
+              "query": [{ "key": "status", "value": "MAINTENANCE" }]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "1. Get All Customers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "customers"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Register New Customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"David\",\n  \"lastName\": \"Beck\",\n  \"email\": \"david.beck@example.com\",\n  \"phone\": \"+1 555-9081\",\n  \"driverLicenseNumber\": \"DL-4920194\",\n  \"address\": \"742 Evergreen Terrace, Springfield\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/customers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "customers"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bookings Workflow",
+      "item": [
+        {
+          "name": "1. Check Car Availability",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings/check-availability?carId=1&startDate=2026-09-01&endDate=2026-09-05",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bookings", "check-availability"],
+              "query": [
+                { "key": "carId", "value": "1" },
+                { "key": "startDate", "value": "2026-09-01" },
+                { "key": "endDate", "value": "2026-09-05" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Create Booking Reservation",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carId\": 1,\n  \"customerId\": 1,\n  \"startDate\": \"2026-09-01\",\n  \"endDate\": \"2026-09-05\",\n  \"includeInsurance\": true,\n  \"promoCode\": \"SAVE10\",\n  \"pickupLocation\": \"Main City Branch\",\n  \"dropoffLocation\": \"Downtown Airport Terminal\",\n  \"paymentMethod\": \"CREDIT_CARD\",\n  \"notes\": \"Flight arrival at 2 PM\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bookings"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Get All Bookings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bookings"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "4. Start Rental (Hand Over Car)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings/1/start",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bookings", "1", "start"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "5. Complete Rental (Return Car & Check Fees)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returnDate\": \"2026-09-05\",\n  \"currentMileage\": 12900,\n  \"hasDamage\": false,\n  \"inspectionNotes\": \"All clear, full tank of fuel\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings/1/return",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bookings", "1", "return"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "6. Cancel Booking",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings/2/cancel?reason=Trip%20postponed",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bookings", "2", "cancel"],
+              "query": [{ "key": "reason", "value": "Trip postponed" }]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard & Analytics",
+      "item": [
+        {
+          "name": "1. Get Operations Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/dashboard/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dashboard", "stats"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}
